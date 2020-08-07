@@ -2,16 +2,28 @@ require_relative '../spec_helper'
 require_relative '../../lib/reader'
 
 RSpec.describe Reader do
+  let(:log) { 'spec/test_data/webserver_test_data.log' }
+  let(:reader) { Reader.new(log) }
 
   context 'when calling most_views' do
     it 'returns hash keys ordered by value count' do
-
+      expect(reader.most_views).to eq({ '/help_page/1' => 4,
+                                        '/home' => 2,
+                                        '/about' => 1,
+                                        '/index' => 1,
+                                        '/about/2' => 1,
+                                        '/contact' => 1 })
     end
   end
 
   context 'when calling unique_views' do
     it 'returns hash keys ordered by unique values' do
-
+      expect(reader.unique_views).to eq({ '/help_page/1' => 4,
+                                          '/contact' => 1,
+                                          '/home' => 2,
+                                          '/about/2' => 1,
+                                          '/index' => 1,
+                                          '/about' => 1 })
     end
   end
 
