@@ -13,4 +13,15 @@ class Parser
     raise 'Incorrect file format' unless file_extension == 'log'
     raise 'File not found' unless File.exist?(path)
   end
+
+  def create_log_hash(file)
+    hash = Hash.new { |h, k| h[k] = [] }
+    file.each do |entry|
+      page, ip = entry.split
+      hash[page] << ip
+    end
+    hash
+    # require 'pry'; binding.pry
+  end
+
 end
