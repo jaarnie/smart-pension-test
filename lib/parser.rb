@@ -21,7 +21,5 @@ class Parser
       hash[page] << ip
     end
     hash
-    # require 'pry'; binding.pry
   end
-
 end
