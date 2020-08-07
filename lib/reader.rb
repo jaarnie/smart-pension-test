@@ -4,6 +4,7 @@ require_relative 'parser'
 class Reader
   def initialize(path)
     @logs = Parser.new.parse_file(path)
+    show_output
   end
 
   def most_views
@@ -23,7 +24,18 @@ class Reader
     hash
   end
 
-  def create_table
+  def create_table(title, rows)
+    table = Terminal::Table.new
+    table.title = title
+    table.headings = %w[page hits]
+    table.rows = rows
+    table.style = { width: 50 }
 
+    "#{table}\n\n"
+  end
+
+  def show_output
+    puts create_table('Most Views', most_views)
+    puts create_table('Unique Views', unique_views)
   end
 end
